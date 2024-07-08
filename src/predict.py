@@ -1,12 +1,20 @@
-import pandas as pd
+from flask import Flask, request, jsonify
 import joblib
+import numpy as np
+# Initialize Flask application  
+app = Flask(__name__)
 
-# Load model
-LR_model = joblib.load('model.pkl')
+knn_model = joblib.load('knn_model.joblib')
 
-# Load new data
-new_data = pd.DataFrame({'feature1': [0.5], 'feature2': [1.5]})
+@app.route('/predict', methods=['POST'])
+def predict():
+    data = request.get_json(force=True)
+    features = np.array(data['features']).reshape(1, -1)
+    prediction = knn_model.predict(features)
+    response = {
+        'prediction': int(prediction[0])
+    }
+    return jsonify(response)
 
-# Predict
-predictions = LR_model.predict(new_data)
-print(predictions)
+if __name__ == '__main__':
+    app.run(debug=True)

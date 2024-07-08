@@ -1,7 +1,6 @@
-from src.predict import predict
+from src.predict import app
 import unittest
 import json
-from predict import app
 
 class TestPredictEndpoint(unittest.TestCase):
 

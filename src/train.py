@@ -3,9 +3,9 @@ from sklearn.linear_model import LinearRegression
 import pickle
 
 # Load data
-data = pd.read_csv('data/data.csv')
-X = data[['feature1', 'feature2']]
-y = data['target']
+data = pd.read_csv('housing.csv')
+X = data[['total_room', 'total_bed']]
+y = data['median_house_value']
 
 # Train model
 model = LinearRegression()

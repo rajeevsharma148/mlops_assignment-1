@@ -1,14 +1,13 @@
 import pandas as pd
-import pickle
+import joblib
 
 def test_prediction():
     # Load model
-    with open('model.pkl', 'rb') as f:
-        model = pickle.load(f)
+    LR_model = joblib.load('model.pkl')
     
     # Load new data
-    new_data = pd.DataFrame({'feature1': [0.5], 'feature2': [1.5]})
+    new_data = pd.DataFrame({'total_room': [5], 'total_bed': [10]})
 
     # Predict
-    predictions = model.predict(new_data)
+    predictions = LR_model.predict(new_data)
     assert len(predictions) == 1

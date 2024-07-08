@@ -1,4 +1,4 @@
-pandas
+joblib
 scikit-learn
 flake8
 pytest

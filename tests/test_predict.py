@@ -1,6 +1,7 @@
+from src.predict import predict
 import unittest
 import json
-from your_flask_app import app  # Replace 'your_flask_app' with the actual name of your Flask app
+from predict import app
 
 class TestPredictEndpoint(unittest.TestCase):
 

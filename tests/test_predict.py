@@ -3,7 +3,7 @@ import pickle
 
 def test_prediction():
     # Load model
-    with open('model/model.pkl', 'rb') as f:
+    with open('model.pkl', 'rb') as f:
         model = pickle.load(f)
     
     # Load new data

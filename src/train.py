@@ -12,5 +12,5 @@ model = LinearRegression()
 model.fit(X, y)
 
 # Save model
-with open('model/model.pkl', 'wb') as f:
+with open('model.pkl', 'wb') as f:
     pickle.dump(model, f)

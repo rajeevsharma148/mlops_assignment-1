@@ -1,4 +1,4 @@
-import src
+import sys
 import os
 
 # Insert the parent directory of 'src' into sys.path

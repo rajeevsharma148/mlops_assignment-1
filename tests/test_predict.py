@@ -2,7 +2,7 @@ import sys
 import os
 
 # Insert the parent directory of 'src' into sys.path
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), 'src')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from src.predict import app
 import unittest
@@ -39,9 +39,27 @@ class TestPredictEndpoint(unittest.TestCase):
         self.assertIn('prediction', response_data)
         self.assertIsInstance(response_data['prediction'], int)
 
-        # Add more specific assertions based on your prediction logic and expected outputs
-        # Example:
-        # self.assertEqual(response_data['prediction'], expected_prediction_value)
+    def test_predict_endpoint_invalid_data(self):
+        # Prepare invalid request data
+        request_data = {
+            'features': ['invalid', 'data']  # Invalid feature values
+        }
+
+        # Convert dictionary to JSON string
+        json_data = json.dumps(request_data)
+
+        # Make POST request to /predict endpoint
+        response = self.app.post('/predict', data=json_data, content_type='application/json')
+
+        # Check if status code is 400 Bad Request
+        self.assertEqual(response.status_code, 400)
+
+        # Decode JSON response data
+        response_data = json.loads(response.data.decode('utf-8'))
+
+        # Check if the error message is in the response
+        self.assertIn('error', response_data)
+        self.assertEqual(response_data['error'], 'Invalid input data: must be numeric')
 
 if __name__ == '__main__':
     unittest.main()
